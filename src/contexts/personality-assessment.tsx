@@ -30,11 +30,11 @@ export const AssessmentProvider = ({
   prefilledResponses,
 }: {
   children: React.ReactNode;
-  prefilledResponses: TResponse[];
+  prefilledResponses?: TResponse[];
 }) => {
   const [store] = useState(() =>
     createStore<AssessmentContextType>((set) => ({
-      responses: prefilledResponses,
+      responses: prefilledResponses ?? [],
       actions: {
         addResponse: (by: TResponse) =>
           set((state) => ({
