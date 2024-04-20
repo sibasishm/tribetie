@@ -1,49 +1,113 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { AssessmentProvider } from "~/contexts/personality-assessment";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "~/components/form";
+
+import { RadioGroup, RadioGroupItem } from "~/components/radio-input";
+
+import { useAssessment } from "~/contexts/personality-assessment";
 import { QUESTIONS } from "~/lib/constants";
+import { cn } from "~/lib/utils";
 
 export default function QuestionPage() {
   const { questionId } = useParams();
+  const { actions } = useAssessment();
+  const router = useRouter();
+
+  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+    actions.addResponse({
+      question_id: Number(questionId),
+      response: data.response,
+    });
+    router.push(`/assessment/${Number(questionId) + 1}`);
+  };
 
   const currentQuestion = QUESTIONS.find(
     (q) => q.question_id === Number(questionId),
   );
 
-  if (!Boolean(currentQuestion)) {
-    return <div>Question not found</div>;
-  }
+  const choices = (currentQuestion
+    ? currentQuestion.choices
+    : [""]) as unknown as readonly [string, ...string[]];
+
+  const FormSchema = z.object({
+    response: z.enum(choices, {
+      required_error: "You need to select a response",
+    }),
+  });
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+  });
 
   return (
-    <AssessmentProvider>
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="font-serif text-4xl font-bold">Question {questionId}</h1>
-        <p className="mt-12 text-xl font-semibold">
-          {currentQuestion?.question}
-        </p>
-        <ol className="mt-12 flex flex-col gap-4">
-          {currentQuestion?.choices.map((option, index) => (
-            <li key={index}>
-              <button
-                className="flex w-full items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                onClick={() => {
-                  console.log("clicked");
-                }}
-              >
-                <span className="flex items-center">
-                  <span className="mr-2">{index + 1}</span>
-                  <span>{option}</span>
-                </span>
-              </button>
-            </li>
-          ))}
-        </ol>
-        <button className="mt-12 w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-          Next
-        </button>
-      </div>
-    </AssessmentProvider>
+    <main className="flex flex-col items-center justify-center">
+      <h1 className="font-serif text-4xl font-bold">
+        Question {questionId}/{QUESTIONS.length}
+      </h1>
+      <p className="mt-12 text-center text-xl font-semibold">
+        {currentQuestion?.question}
+      </p>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6">
+          <FormField
+            control={form.control}
+            name="response"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel className="sr-only">
+                  {currentQuestion?.question}
+                </FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col space-y-2"
+                  >
+                    {choices.map((choice, index) => (
+                      <FormItem
+                        key={index}
+                        className={cn(
+                          "flex items-center space-x-3 space-y-0 rounded-xl border p-3 px-4",
+                          field.value === choice
+                            ? "border-primary text-primary border-2"
+                            : "border-slate-50",
+                        )}
+                      >
+                        <FormControl>
+                          <RadioGroupItem
+                            value={choice}
+                            className="radio-primary"
+                            checked={field.value === choice}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-base font-medium">
+                          {choice}
+                        </FormLabel>
+                      </FormItem>
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <button type="submit" className="btn btn-primary mt-12 w-80">
+            Next
+          </button>
+        </form>
+      </Form>
+    </main>
   );
 }

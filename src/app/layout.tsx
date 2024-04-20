@@ -3,7 +3,7 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 
 import { ClerkProvider } from "@clerk/nextjs";
-import TopNav from "./_components/topnav";
+import TopNav from "../components/topnav";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,9 +24,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body
-          className={`font-sans ${inter.variable} bg-slate-100 text-slate-600 antialiased dark:bg-slate-900 dark:text-slate-300`}
-        >
+        <body className={`font-sans ${inter.variable}`}>
           <TopNav />
           <main className="container mx-auto max-w-7xl px-4 py-10">
             {children}

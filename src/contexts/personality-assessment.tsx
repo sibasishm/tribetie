@@ -50,3 +50,5 @@ export const AssessmentProvider = ({
     </AssessmentContext.Provider>
   );
 };
+
+export const useAssessment = () => useAssessmentStore((state) => state);
