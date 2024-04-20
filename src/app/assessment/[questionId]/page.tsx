@@ -22,16 +22,18 @@ import { cn } from "~/lib/utils";
 
 export default function QuestionPage() {
   const { questionId } = useParams();
-  const { actions } = useAssessment();
+  const { addResponse, responses } = useAssessment();
   const router = useRouter();
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    actions.addResponse({
+    addResponse({
       question_id: Number(questionId),
       response: data.response,
     });
     router.push(`/assessment/${Number(questionId) + 1}`);
   };
+
+  console.log(responses);
 
   const currentQuestion = QUESTIONS.find(
     (q) => q.question_id === Number(questionId),
@@ -81,7 +83,7 @@ export default function QuestionPage() {
                         className={cn(
                           "flex items-center space-x-3 space-y-0 rounded-xl border p-3 px-4",
                           field.value === choice
-                            ? "border-primary text-primary border-2"
+                            ? "border-2 border-primary text-primary"
                             : "border-slate-50",
                         )}
                       >

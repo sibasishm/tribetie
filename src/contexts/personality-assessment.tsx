@@ -1,54 +1,52 @@
-import { useContext, useState, createContext } from "react";
-import { createStore, useStore, type StoreApi } from "zustand";
+import React from "react";
+import { useStore, type StoreApi } from "zustand";
+import { createStore } from "zustand/vanilla";
 import type { TResponse } from "~/lib/types";
 
-export type AssessmentContextType = {
-  responses: TResponse[];
-  actions: {
-    addResponse: (by: TResponse) => void;
+const createZustandContext = <TInitial, TStore extends StoreApi<unknown>>(
+  getStore: (initial: TInitial) => TStore,
+) => {
+  const Context = React.createContext(null as unknown as TStore);
+
+  const Provider = (props: {
+    children?: React.ReactNode;
+    initialValue: TInitial;
+  }) => {
+    const [store] = React.useState(() => getStore(props.initialValue));
+
+    return <Context.Provider value={store}>{props.children}</Context.Provider>;
+  };
+
+  return {
+    useContext: () => React.useContext(Context),
+    Context,
+    Provider,
   };
 };
 
-const AssessmentContext = createContext<StoreApi<AssessmentContextType> | null>(
-  null,
+type State = {
+  responses: TResponse[];
+  addResponse: (response: TResponse) => void;
+};
+
+export const AssessmentContext = createZustandContext(
+  (initialState: { response: TResponse[] }) => {
+    return createStore<State>()((set) => ({
+      responses: initialState.response,
+      addResponse: (response) =>
+        set((state) => ({
+          responses: [...state.responses, response],
+        })),
+    }));
+  },
 );
 
-export const useAssessmentStore = (
-  selector: (state: AssessmentContextType) => AssessmentContextType,
-) => {
-  const store = useContext(AssessmentContext);
+export function useAssessmentStore<T>(selector: (state: State) => T) {
+  const store = React.useContext(AssessmentContext.Context);
   if (!store) {
-    throw new Error(
-      "useAssessmentContext must be used within a AssessmentProvider",
-    );
+    throw new Error("Missing AssessmentStoreProvider");
   }
   return useStore(store, selector);
-};
-
-export const AssessmentProvider = ({
-  children,
-  prefilledResponses,
-}: {
-  children: React.ReactNode;
-  prefilledResponses?: TResponse[];
-}) => {
-  const [store] = useState(() =>
-    createStore<AssessmentContextType>((set) => ({
-      responses: prefilledResponses ?? [],
-      actions: {
-        addResponse: (by: TResponse) =>
-          set((state) => ({
-            responses: [...state.responses, by],
-          })),
-      },
-    })),
-  );
-
-  return (
-    <AssessmentContext.Provider value={store}>
-      {children}
-    </AssessmentContext.Provider>
-  );
-};
+}
 
 export const useAssessment = () => useAssessmentStore((state) => state);
