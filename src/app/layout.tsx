@@ -2,6 +2,9 @@ import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
+import { ClerkProvider } from "@clerk/nextjs";
+import TopNav from "./_components/topnav";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -19,8 +22,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`font-sans ${inter.variable} bg-slate-100 text-slate-600 antialiased dark:bg-slate-900 dark:text-slate-300`}
+        >
+          <TopNav />
+          <main className="container mx-auto max-w-7xl px-4 py-10">
+            {children}
+          </main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
