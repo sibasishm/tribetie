@@ -19,21 +19,35 @@ import { RadioGroup, RadioGroupItem } from "~/components/radio-input";
 import { useAssessment } from "~/contexts/personality-assessment";
 import { QUESTIONS } from "~/lib/constants";
 import { cn } from "~/lib/utils";
+import { matchPersona } from "~/lib/persona-matcher";
+import { createPersona } from "~/app/actions";
 
 export default function QuestionPage() {
   const { questionId } = useParams();
   const { addResponse, responses } = useAssessment();
   const router = useRouter();
 
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     addResponse({
       question_id: Number(questionId),
       response: data.response,
     });
-    router.push(`/assessment/${Number(questionId) + 1}`);
+    if (Number(questionId) === QUESTIONS.length) {
+      try {
+        const persona = matchPersona(responses);
+        if (persona) {
+          await createPersona(persona.persona_id);
+          router.push("/welcome");
+        } else {
+          alert("No persona found");
+        }
+      } catch (error) {
+        console.error("Add Toast", error);
+      }
+    } else {
+      router.push(`/assessment/${Number(questionId) + 1}`);
+    }
   };
-
-  console.log(responses);
 
   const currentQuestion = QUESTIONS.find(
     (q) => q.question_id === Number(questionId),
