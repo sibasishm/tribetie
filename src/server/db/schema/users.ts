@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 import { commentVotes } from "./commentVotes";
 import { posts } from "./posts";
@@ -14,6 +14,7 @@ export const users = pgTable("user", {
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
   username: text("username").unique(),
+  personaId: integer("persona_id"),
 });
 
 export type User = typeof users.$inferSelect;
