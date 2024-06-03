@@ -26,9 +26,11 @@ export const getCurrentUser = async () => {
 
     if (!currentUser && !cachedCurrentUser) return null;
 
+    console.log(currentUser, cachedCurrentUser);
+
     const userId = currentUser?.id ?? cachedCurrentUser.id;
 
-    if (!currentUser?.username && !cachedCurrentUser.username) {
+    if (!currentUser?.username && !cachedCurrentUser?.username) {
       await db
         .update(users)
         .set({ username: nanoid(10) })

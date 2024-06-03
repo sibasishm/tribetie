@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 import { db } from "~/server/db";
 import { env } from "~/env.js";
+// import { accounts, users } from "~/server/db/schema";
 
 const authOptions: AuthOptions = {
   adapter: DrizzleAdapter(db) as Adapter,
