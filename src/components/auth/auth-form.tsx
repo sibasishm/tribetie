@@ -12,7 +12,6 @@ import { Icons } from "../icons";
 enum PROVIDER {
   NULL = "",
   GOOGLE = "google",
-  GITHUB = "github",
 }
 
 const AuthForm = () => {
@@ -52,18 +51,6 @@ const AuthForm = () => {
           <Icons.google className="mr-2 h-4 w-4" />
         )}{" "}
         Google
-      </button>
-      <button
-        onClick={() => void login(PROVIDER.GITHUB)}
-        disabled={isLoading}
-        className="btn btn-primary btn-wide"
-      >
-        {loadingProvider === PROVIDER.GITHUB ? (
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Icons.github className="mr-2 h-4 w-4" />
-        )}{" "}
-        Github
       </button>
     </div>
   );

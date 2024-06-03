@@ -2,7 +2,7 @@ import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
-import TopNav from "../components/topnav";
+import NavBar from "../components/navabr/navbar";
 import Providers from "~/components/providers";
 import { Toaster } from "~/components/toaster";
 
@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <Providers>
-          <TopNav />
+          <NavBar />
           {authModal}
           <main className="container mx-auto max-w-7xl px-4 py-10">
             {children}
