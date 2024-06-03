@@ -1,19 +1,11 @@
 import { relations } from "drizzle-orm";
-import {
-  index,
-  pgTableCreator,
-  serial,
-  text,
-  timestamp,
-} from "drizzle-orm/pg-core";
+import { index, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
 import { posts } from "./posts";
 import { subscriptions } from "./subscriptions";
 import { users } from "./users";
 
-const createTable = pgTableCreator((name) => `tribetie_${name}`);
-
-export const communities = createTable(
+export const communities = pgTable(
   "community",
   {
     id: serial("id").primaryKey(),

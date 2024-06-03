@@ -1,16 +1,16 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-const isDashboardRoute = createRouteMatcher(["/dashboard(.*)"]);
-const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
+import { getToken } from "next-auth/jwt";
 
-export default clerkMiddleware((auth, req) => {
-  // Restrict admin route to users with specific role
-  if (isAdminRoute(req)) auth().protect({ role: "org:admin" });
+export async function middleware(req: NextRequest) {
+  const token = await getToken({ req });
 
-  // Restrict dashboard routes to logged in users
-  if (isDashboardRoute(req)) auth().protect();
-});
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
+  }
+}
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/r/:path*/submit", "/r/create", "/settings"],
 };

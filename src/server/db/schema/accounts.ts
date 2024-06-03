@@ -1,11 +1,9 @@
 import type { AdapterAccount } from "@auth/core/adapters";
-import { integer, pgTableCreator, primaryKey, text } from "drizzle-orm/pg-core";
+import { integer, pgTable, primaryKey, text } from "drizzle-orm/pg-core";
 
 import { users } from "./users";
 
-const createTable = pgTableCreator((name) => `tribetie_${name}`);
-
-export const accounts = createTable(
+export const accounts = pgTable(
   "account",
   {
     userId: text("userId")
