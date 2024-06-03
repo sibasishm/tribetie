@@ -20,7 +20,7 @@ export const posts = pgTable("post", {
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt"),
 
-  subredditId: integer("subredditId")
+  communityId: integer("communityId")
     .notNull()
     .references(() => communities.id, { onDelete: "cascade" }),
 
@@ -33,8 +33,8 @@ export type Post = typeof posts.$inferSelect;
 export type NewPost = typeof posts.$inferInsert;
 
 export const postsRelations = relations(posts, ({ one, many }) => ({
-  subreddit: one(communities, {
-    fields: [posts.subredditId],
+  community: one(communities, {
+    fields: [posts.communityId],
     references: [communities.id],
   }),
 

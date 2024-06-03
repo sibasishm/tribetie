@@ -26,7 +26,7 @@ export const votes = pgTable(
       .references(() => posts.id, { onDelete: "cascade" }),
   },
   (vote) => ({
-    compoundKey: primaryKey(vote.authorId, vote.postId),
+    compoundKey: primaryKey({ columns: [vote.authorId, vote.postId] }),
   }),
 );
 

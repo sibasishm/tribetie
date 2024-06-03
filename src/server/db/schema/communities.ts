@@ -6,7 +6,7 @@ import { subscriptions } from "./subscriptions";
 import { users } from "./users";
 
 export const communities = pgTable(
-  "subreddit",
+  "community",
   {
     id: serial("id").primaryKey(),
     name: text("name").notNull(),
@@ -15,8 +15,8 @@ export const communities = pgTable(
 
     creatorId: text("creatorId").references(() => users.id),
   },
-  (subreddit) => ({
-    nameIdx: index("name_idx").on(subreddit.name),
+  (community) => ({
+    nameIdx: index("name_idx").on(community.name),
   }),
 );
 

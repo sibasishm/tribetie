@@ -10,12 +10,14 @@ export const subscriptions = pgTable(
     userId: text("userId")
       .notNull()
       .references(() => users.id),
-    subredditId: integer("subredditId")
+    communityId: integer("communityId")
       .notNull()
       .references(() => communities.id),
   },
   (subscription) => ({
-    compoundKey: primaryKey(subscription.userId, subscription.subredditId),
+    compoundKey: primaryKey({
+      columns: [subscription.userId, subscription.communityId],
+    }),
   }),
 );
 
@@ -27,8 +29,8 @@ export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
     fields: [subscriptions.userId],
     references: [users.id],
   }),
-  subreddit: one(communities, {
-    fields: [subscriptions.subredditId],
+  community: one(communities, {
+    fields: [subscriptions.communityId],
     references: [communities.id],
   }),
 }));
