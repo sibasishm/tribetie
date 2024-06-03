@@ -1,11 +1,13 @@
 import { relations } from "drizzle-orm";
-import { integer, pgTable, primaryKey, text } from "drizzle-orm/pg-core";
+import { integer, pgTableCreator, primaryKey, text } from "drizzle-orm/pg-core";
 
 import { comments } from "./comments";
 import { users } from "./users";
 import { voteType } from "./votes";
 
-export const commentVotes = pgTable(
+const createTable = pgTableCreator((name) => `tribetie_${name}`);
+
+export const commentVotes = createTable(
   "commentVote",
   {
     type: voteType("type"),

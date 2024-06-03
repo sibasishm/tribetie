@@ -1,11 +1,19 @@
 import { relations } from "drizzle-orm";
-import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  integer,
+  pgTableCreator,
+  serial,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
 
 import { commentVotes } from "./commentVotes";
 import { posts } from "./posts";
 import { users } from "./users";
 
-export const comments = pgTable("comment", {
+const createTable = pgTableCreator((name) => `tribetie_${name}`);
+
+export const comments = createTable("comment", {
   id: serial("id").primaryKey(),
   text: text("text").notNull(),
   createdAt: timestamp("createdAt").defaultNow(),

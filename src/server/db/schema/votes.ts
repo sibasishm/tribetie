@@ -2,7 +2,7 @@ import { relations } from "drizzle-orm";
 import {
   integer,
   pgEnum,
-  pgTable,
+  pgTableCreator,
   primaryKey,
   text,
 } from "drizzle-orm/pg-core";
@@ -12,7 +12,9 @@ import { users } from "./users";
 
 export const voteType = pgEnum("type", ["UP", "DOWN"]);
 
-export const votes = pgTable(
+const createTable = pgTableCreator((name) => `tribetie_${name}`);
+
+export const votes = createTable(
   "vote",
   {
     type: voteType("type"),

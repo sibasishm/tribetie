@@ -1,10 +1,12 @@
 import { relations } from "drizzle-orm";
-import { integer, pgTable, primaryKey, text } from "drizzle-orm/pg-core";
+import { integer, pgTableCreator, primaryKey, text } from "drizzle-orm/pg-core";
 
 import { communities } from "./communities";
 import { users } from "./users";
 
-export const subscriptions = pgTable(
+const createTable = pgTableCreator((name) => `tribetie_${name}`);
+
+export const subscriptions = createTable(
   "subscription",
   {
     userId: text("userId")

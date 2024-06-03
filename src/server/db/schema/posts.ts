@@ -2,7 +2,7 @@ import { relations } from "drizzle-orm";
 import {
   integer,
   json,
-  pgTable,
+  pgTableCreator,
   serial,
   text,
   timestamp,
@@ -13,7 +13,9 @@ import { communities } from "./communities";
 import { users } from "./users";
 import { votes } from "./votes";
 
-export const posts = pgTable("post", {
+const createTable = pgTableCreator((name) => `tribetie_${name}`);
+
+export const posts = createTable("post", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   content: json("content"),
