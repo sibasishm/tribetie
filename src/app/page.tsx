@@ -1,20 +1,59 @@
 import Link from "next/link";
-import { getCurrentUser } from "~/services/user";
 
-export default async function HomePage() {
+import { HomeIcon } from "lucide-react";
+
+import { getCurrentUser } from "~/services/user";
+// import CustomFeed from '@/components/feed/CustomFeed'
+// import GeneralFeed from '@/components/feed/GeneralFeed'
+
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
+const HomePage = async () => {
   const currentUser = await getCurrentUser();
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="font-serif text-4xl font-semibold">Welcome to TribeTie</h1>
-      <p className="mt-3 text-sm">A place where connections become a tribe.</p>
-      <div className="mt-8">
-        {currentUser ? (
-          <Link href="/assessment/1">Take assessment</Link>
-        ) : (
-          <p className="text-sm">Please sign in to continue.</p>
-        )}
+    <>
+      <h1 className="text-3xl font-bold md:text-4xl">Your Feed</h1>
+      <div className="grid grid-cols-1 gap-y-4 py-6 md:grid-cols-3 md:gap-x-4">
+        {/* {currentUser ? <CustomFeed /> : <GeneralFeed />} */}
+        <div className="order-first h-fit overflow-hidden rounded-lg border border-gray-200 md:order-last">
+          <div className="bg-emerald-100 px-6 py-4">
+            <p className="flex items-center gap-1.5 py-3 font-semibold">
+              <HomeIcon className="h-4 w-4" />
+              Home
+            </p>
+          </div>
+          <div className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+            {currentUser ? (
+              <>
+                <div className="flex justify-between gap-x-4 pb-3">
+                  <p className="text-zinc-500">
+                    Know your personality and interests to find the right
+                    communities for you.
+                  </p>
+                </div>
+                <Link href="/assessment/1" className="btn btn-primary btn-wide">
+                  Take assessment
+                </Link>
+              </>
+            ) : (
+              <>
+                <div className="flex justify-between gap-x-4 pb-3">
+                  <p className="text-zinc-500">
+                    Create community and find the right communities for you.
+                  </p>
+                </div>
+                <Link href="/create" className="btn btn-wide">
+                  Create community
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
-}
+};
+
+export default HomePage;
