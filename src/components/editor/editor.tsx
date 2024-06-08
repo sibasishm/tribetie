@@ -17,10 +17,10 @@ import { PostValidator, type PostCreationRequest } from "~/lib/validators/post";
 import { toast } from "~/hooks/use-toast";
 
 type EditorProps = {
-  subredditId: number;
+  communityId: number;
 };
 
-const Editor: React.FC<EditorProps> = ({ subredditId }) => {
+const Editor: React.FC<EditorProps> = ({ communityId }) => {
   const pathname = usePathname();
 
   const [isMounted, setIsMounted] = useState(false);
@@ -35,7 +35,7 @@ const Editor: React.FC<EditorProps> = ({ subredditId }) => {
   } = useForm<PostCreationRequest>({
     resolver: zodResolver(PostValidator),
     defaultValues: {
-      subredditId,
+      communityId,
       title: "",
       content: null,
     },
@@ -140,12 +140,12 @@ const Editor: React.FC<EditorProps> = ({ subredditId }) => {
     mutationFn: async ({
       title,
       content,
-      subredditId,
+      communityId,
     }: PostCreationRequest) => {
       const payload: PostCreationRequest = {
         title,
         content,
-        subredditId,
+        communityId,
       };
 
       const data = await ky
@@ -181,7 +181,7 @@ const Editor: React.FC<EditorProps> = ({ subredditId }) => {
     const payload: PostCreationRequest = {
       title: data.title,
       content: blocks,
-      subredditId,
+      communityId,
     };
 
     createPost(payload);

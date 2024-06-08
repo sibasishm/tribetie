@@ -33,7 +33,7 @@ const HomePage = async () => {
                     communities for you.
                   </p>
                 </div>
-                <Link href="/assessment/1" className="btn btn-primary btn-wide">
+                <Link href="/assessment/1" className="btn btn-primary btn-block">
                   Take assessment
                 </Link>
               </>
@@ -44,7 +44,7 @@ const HomePage = async () => {
                     Create community and find the right communities for you.
                   </p>
                 </div>
-                <Link href="/create" className="btn btn-wide">
+                <Link href="/create" className="btn btn-block">
                   Create community
                 </Link>
               </>

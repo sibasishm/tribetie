@@ -43,7 +43,7 @@ const AuthForm = () => {
       <button
         onClick={() => void login(PROVIDER.GOOGLE)}
         disabled={isLoading}
-        className="btn btn-primary btn-wide"
+        className="btn btn-primary btn-block"
       >
         {loadingProvider === PROVIDER.GOOGLE ? (
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
