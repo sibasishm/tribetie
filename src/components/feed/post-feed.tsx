@@ -40,7 +40,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
       return ky.get(query).json<ExtendedPost[]>();
     },
     getNextPageParam: (_, pages) => {
-      return pages.length + 1; // TODO: fix infinite data fetching
+      return pages.length + 1;
     },
     initialPageParam: 1,
     initialData: {
@@ -55,8 +55,6 @@ const PostFeed: React.FC<PostFeedProps> = ({
       void fetchNextPage();
     }
   }, [entry, fetchNextPage]);
-
-  console.log("rendering")
 
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
