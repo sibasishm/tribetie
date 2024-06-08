@@ -10,13 +10,13 @@ const Register = () => {
         <Icons.logo className="mx-auto h-12 w-12" />
         <h1 className="text-2xl font-semibold tracking-tight">Sign up</h1>
         <p className="mx-auto max-w-xs text-sm">
-          By continuing, you are setting up a Reddit account and agree to our
+          By continuing, you are setting up a TribeTie account and agree to our
           User Agreement and Privacy Policy.
         </p>
       </div>
       <AuthForm />
       <p className="text-muted-foreground px-8 text-center text-sm">
-        Already a redditor?{" "}
+        Already a triber?{" "}
         <Link
           href="/login"
           className="text-sm underline underline-offset-4 transition duration-300 hover:text-slate-700"

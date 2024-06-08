@@ -149,7 +149,7 @@ const Editor: React.FC<EditorProps> = ({ communityId }) => {
       };
 
       const data = await ky
-        .post("/api/subreddit/post/create", {
+        .post("/api/community/post/create", {
           json: payload,
         })
         .json<string>();
@@ -196,7 +196,7 @@ const Editor: React.FC<EditorProps> = ({ communityId }) => {
   return (
     <div className="w-full rounded-lg border border-zinc-200 bg-zinc-50 p-4">
       <form
-        id="subreddit-form-post"
+        id="community-form-post"
         className="w-fit"
         onSubmit={(...args) => void handleSubmit(onSubmit)(...args)}
       >

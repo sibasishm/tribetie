@@ -16,7 +16,7 @@ type PostProps = {
     author: User;
     votes: Vote[];
   };
-  subredditName: string;
+  communityName: string;
   commentAmount: number;
   voteAmount: number;
   currentVote?: PartialVote;
@@ -24,7 +24,7 @@ type PostProps = {
 
 const Post: React.FC<PostProps> = ({
   post,
-  subredditName,
+  communityName,
   commentAmount,
   // voteAmount,
   // currentVote,
@@ -41,13 +41,13 @@ const Post: React.FC<PostProps> = ({
         /> */}
         <div className="w-0 flex-1">
           <div className="mt-1 max-h-40 text-xs text-gray-500">
-            {subredditName && (
+            {communityName && (
               <>
                 <a
                   className="text-sm text-zinc-900 underline underline-offset-2"
-                  href={`/r/${subredditName}`}
+                  href={`/r/${communityName}`}
                 >
-                  r/{subredditName}
+                  r/{communityName}
                 </a>
                 <span className="px-1">•</span>
               </>
@@ -56,7 +56,7 @@ const Post: React.FC<PostProps> = ({
             {formatTimeToNow(new Date(post.createdAt!))}
           </div>
 
-          <a href={`/r/${subredditName}/post/${post.id}`}>
+          <a href={`/r/${communityName}/post/${post.id}`}>
             <h3 className="py-2 text-lg font-semibold leading-6 text-gray-900">
               {post.title}
             </h3>
@@ -76,7 +76,7 @@ const Post: React.FC<PostProps> = ({
 
       <div className="z-20 bg-gray-50 p-4 text-sm sm:px-6">
         <a
-          href={`/r/${subredditName}/post/${post.id}`}
+          href={`/r/${communityName}/post/${post.id}`}
           className="flex w-fit items-center gap-2"
         >
           <MessageSquare className="h-4 w-4" /> {commentAmount} comments

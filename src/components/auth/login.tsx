@@ -15,7 +15,7 @@ const Login = () => {
       </div>
       <AuthForm />
       <p className="text-muted-foreground px-8 text-center text-sm">
-        New to Reddit?{" "}
+        New to TribeTie?{" "}
         <Link
           href="/register"
           className="text-sm underline underline-offset-4 transition duration-300 hover:text-slate-700"

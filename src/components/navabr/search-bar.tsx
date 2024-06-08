@@ -88,17 +88,17 @@ const SearchBar = () => {
           ) : (
             (queryResults?.length ?? 0) > 0 && (
               <CommandGroup heading="Communities">
-                {queryResults?.map((subreddit) => (
+                {queryResults?.map((community) => (
                   <CommandItem
-                    key={subreddit.id}
-                    value={subreddit.name}
+                    key={community.id}
+                    value={community.name}
                     onSelect={(e) => {
                       router.push(`/r/${e}`);
                       router.refresh();
                     }}
                   >
                     <Users className="mr-2 h-4 w-4" />
-                    <a href={`/r/${subreddit.name}`}>r/{subreddit.name}</a>
+                    <a href={`/r/${community.name}`}>r/{community.name}</a>
                   </CommandItem>
                 ))}
               </CommandGroup>

@@ -15,13 +15,13 @@ import Post from "../post/post-card";
 
 type PostFeedProps = {
   initialPosts: ExtendedPost[];
-  subredditName?: string;
+  communityName?: string;
   currentUser: User | null | undefined;
 };
 
 const PostFeed: React.FC<PostFeedProps> = ({
   initialPosts,
-  subredditName,
+  communityName,
   currentUser,
 }) => {
   const lastPostRef = useRef<HTMLLIElement>(null);
@@ -35,7 +35,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
     queryFn: ({ pageParam = 1 }) => {
       const query =
         `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
-        (subredditName ? `&subredditName=${subredditName}` : "");
+        (communityName ? `&communityName=${communityName}` : "");
 
       return ky.get(query).json<ExtendedPost[]>();
     },
@@ -58,7 +58,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
   return (
     <ul className="col-span-2 flex flex-col space-y-6">
       {posts.map((post, index) => {
-        const subredditName = post.community.name;
+        const communityName = post.community.name;
         const commentAmount = post.comments.length;
 
         const voteAmount = post.votes.reduce((total, vote) => {
@@ -77,7 +77,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
               currentVote={currentVote}
               voteAmount={voteAmount}
               post={post}
-              subredditName={subredditName}
+              communityName={communityName}
               commentAmount={commentAmount}
             />
           </li>
@@ -87,7 +87,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
               currentVote={currentVote}
               voteAmount={voteAmount}
               post={post}
-              subredditName={subredditName}
+              communityName={communityName}
               commentAmount={commentAmount}
             />
           </li>
