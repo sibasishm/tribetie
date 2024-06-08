@@ -42,7 +42,8 @@ const PostFeed: React.FC<PostFeedProps> = ({
     getNextPageParam: (_, pages) => {
       return pages.length + 1;
     },
-    initialData: { pages: [initialPosts], pageParams: [1] },
+    initialPageParam: 1,
+    // initialData: { pages: [initialPosts], pageParams: [1] },
     refetchOnMount: false,
     refetchOnReconnect: false,
   });

@@ -25,7 +25,7 @@ const CustomFeed = async () => {
 
   const posts = await db.query.posts.findMany({
     orderBy: [desc(Posts.createdAt)],
-    where: inArray(Posts.communityId, followedCommunitiesIds),
+    // where: inArray(Posts.communityId, followedCommunitiesIds),
     with: {
       author: true,
       community: true,
