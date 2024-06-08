@@ -45,7 +45,7 @@ const Post: React.FC<PostProps> = ({
               <>
                 <a
                   className="text-sm text-zinc-900 underline underline-offset-2"
-                  href={`/r/${communityName}`}
+                  href={`/t/${communityName}`}
                 >
                   r/{communityName}
                 </a>
@@ -56,7 +56,7 @@ const Post: React.FC<PostProps> = ({
             {formatTimeToNow(new Date(post.createdAt!))}
           </div>
 
-          <a href={`/r/${communityName}/post/${post.id}`}>
+          <a href={`/t/${communityName}/post/${post.id}`}>
             <h3 className="py-2 text-lg font-semibold leading-6 text-gray-900">
               {post.title}
             </h3>
@@ -76,7 +76,7 @@ const Post: React.FC<PostProps> = ({
 
       <div className="z-20 bg-gray-50 p-4 text-sm sm:px-6">
         <a
-          href={`/r/${communityName}/post/${post.id}`}
+          href={`/t/${communityName}/post/${post.id}`}
           className="flex w-fit items-center gap-2"
         >
           <MessageSquare className="h-4 w-4" /> {commentAmount} comments

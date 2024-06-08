@@ -11,6 +11,7 @@ export const fetchCache = "force-no-store";
 
 const HomePage = async () => {
   const currentUser = await getCurrentUser();
+  const hasTakenAssessment = currentUser?.personaId !== null;
 
   return (
     <>
@@ -25,7 +26,18 @@ const HomePage = async () => {
             </p>
           </div>
           <div className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
-            {currentUser ? (
+            {currentUser && hasTakenAssessment ? (
+              <>
+              <div className="flex justify-between gap-x-4 pb-3">
+                <p className="text-zinc-500">
+                  Create community and find the right communities for you.
+                </p>
+              </div>
+              <Link href="/t/create" className="btn btn-primary btn-block">
+                Create community
+              </Link>
+            </>
+            ) : (
               <>
                 <div className="flex justify-between gap-x-4 pb-3">
                   <p className="text-zinc-500">
@@ -37,17 +49,7 @@ const HomePage = async () => {
                   Take assessment
                 </Link>
               </>
-            ) : (
-              <>
-                <div className="flex justify-between gap-x-4 pb-3">
-                  <p className="text-zinc-500">
-                    Create community and find the right communities for you.
-                  </p>
-                </div>
-                <Link href="/create" className="btn btn-block">
-                  Create community
-                </Link>
-              </>
+              
             )}
           </div>
         </div>
