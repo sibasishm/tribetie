@@ -3,12 +3,12 @@ import { defineConfig } from "drizzle-kit";
 import { env } from "~/env";
 
 export default defineConfig({
-  schema: "./src/server/db/schema.ts",
-  driver: "pg",
+  schema: "./src/server/db/schema",
+  out: "./drizzle",
+  dialect: "postgresql",
   dbCredentials: {
-    connectionString: env.POSTGRES_URL,
+    url: env.POSTGRES_URL,
   },
-  tablesFilter: ["tribetie_*"],
   verbose: true,
   strict: true,
 });

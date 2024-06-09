@@ -36,6 +36,7 @@ export default function QuestionPage() {
       try {
         const persona = matchPersona(responses);
         if (persona) {
+          console.log("persona", persona);
           await createPersona(persona.persona_id);
           router.push("/welcome");
         } else {

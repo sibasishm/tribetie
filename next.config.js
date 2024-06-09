@@ -5,6 +5,15 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: [
+      "avatars.githubusercontent.com",
+      "lh3.googleusercontent.com",
+      "utfs.io",
+    ],
+  },
+};
 
-export default config;
+export default nextConfig;

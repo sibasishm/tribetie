@@ -3,9 +3,19 @@ import { type Config } from "tailwindcss";
 /** @type {import('tailwindcss').Config} */
 
 export default {
-  darkMode: ["class"],
+  daisyui: {
+    themes: ["dim"],
+  },
   content: ["./src/**/*.{ts,tsx}"],
-  theme: {},
+  theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+  },
   plugins: [
     require("@tailwindcss/typography"),
     require("daisyui"),

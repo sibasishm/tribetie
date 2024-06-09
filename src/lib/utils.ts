@@ -1,6 +1,71 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { formatDistanceToNowStrict } from "date-fns";
+import locale from "date-fns/locale/en-IN";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+const formatDistanceLocale = {
+  lessThanXSeconds: "just now",
+  xSeconds: "just now",
+  halfAMinute: "just now",
+  lessThanXMinutes: "{{count}}m",
+  xMinutes: "{{count}}m",
+  aboutXHours: "{{count}}h",
+  xHours: "{{count}}h",
+  xDays: "{{count}}d",
+  aboutXWeeks: "{{count}}w",
+  xWeeks: "{{count}}w",
+  aboutXMonths: "{{count}}mo",
+  xMonths: "{{count}}mo",
+  aboutXYears: "{{count}}y",
+  xYears: "{{count}}y",
+  overXYears: "{{count}}y",
+  almostXYears: "{{count}}y",
+};
+
+function formatDistance(
+  token: string,
+  count: number,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  options: any = {},
+): string {
+  const result = formatDistanceLocale[
+    token as keyof typeof formatDistanceLocale
+  ].replace("{{count}}", count.toString());
+
+  if (options.addSuffix) {
+    if (options.comparison > 0) {
+      return `in ${result}`;
+    } else {
+      if (result === "just now") return result;
+      return `${result} ago`;
+    }
+  }
+
+  return result;
+}
+
+export function formatTimeToNow(date: Date): string {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+  return formatDistanceToNowStrict(date, {
+    addSuffix: true,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    locale: {
+      ...locale,
+      formatDistance,
+    },
+  });
+}
+
+export const getCommunityPath = (pathname: string) => {
+  const splitPath = pathname.split('/')
+
+  if (splitPath.length === 3) return '/'
+  else if (splitPath.length > 3) return `/${splitPath[1]}/${splitPath[2]}`
+  // default path, in case pathname does not match expected format
+  else return '/'
 }
