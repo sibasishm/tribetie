@@ -73,7 +73,7 @@ const SearchBar = () => {
       />
 
       {input.length > 0 && (
-        <CommandList className="absolute inset-x-0 top-full rounded-b-md bg-white shadow">
+        <CommandList className="absolute inset-x-0 top-full rounded-b-md bg-base-100 shadow">
           <CommandEmpty
             className={cn(isFetching ? "hidden" : "py-6 text-center text-sm")}
           >

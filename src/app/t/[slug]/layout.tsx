@@ -65,26 +65,26 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = async ({
         <div className='col-span-2 flex flex-col space-y-6'>{children}</div>
 
         {/* Info sidebar */}
-        <div className='order-first hidden h-fit overflow-hidden rounded-lg border border-gray-200 md:order-last md:block'>
+        <div className='order-first hidden h-fit overflow-hidden rounded-lg border border-gray-500 md:order-last md:block'>
           <div className='px-6 py-4'>
-            <p className='py-3 font-semibold'>About r/{community?.name}</p>
+            <p className='py-3 font-semibold'>About t/{community?.name}</p>
           </div>
 
-          <dl className='divide-y divide-gray-100 bg-white px-6 py-4 text-sm leading-6'>
-            <div className='flex justify-between gap-x-4 py-3'>
-              <dt className='text-gray-500'>Created</dt>
-              <dd className='text-gray-700'>
-                <time dateTime={community.createdAt?.toDateString()}>
-                  {format(community.createdAt!, 'MMMM d, yyyy')}
-                </time>
-              </dd>
-            </div>
-
-            <div className='flex justify-between gap-x-4 py-3'>
-              <dt className='text-gray-500'>Members</dt>
-              <dd className='text-gray-700'>
-                <div className='text-gray-900'>{memberCount?.count ?? 0}</div>
-              </dd>
+          <dl className='bg-base-100 px-6 pb-4 text-sm leading-6'>
+            <div className="divide-y divide-gray-500 mb-4">
+              <div className='flex justify-between gap-x-4 py-3'>
+                <dt className='text-gray-300'>Created</dt>
+                <dd className='text-gray-300'>
+                  <time dateTime={community.createdAt?.toDateString()}>
+                    {format(community.createdAt!, 'MMMM d, yyyy')}
+                  </time>
+                </dd>
+              </div>
+              <div className='flex justify-between gap-x-4 py-3'>
+                <dt className='text-gray-300'>Members</dt>
+                <dd className='text-gray-300'>{memberCount?.count ?? 0}
+                </dd>
+              </div>
             </div>
 
             {community.creatorId === currentUser?.id ? (

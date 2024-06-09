@@ -106,7 +106,7 @@ const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
     <button
       onClick={() => void unsubscribe()}
       disabled={isUnsubLoading}
-      className='btn mb-4 mt-1 btn-block'
+      className='btn mb-4 mt-1 btn-block btn-accent'
     >
       {isUnsubLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}{' '}
       Leave community
@@ -115,7 +115,7 @@ const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
     <button
       onClick={() => void subscribe()}
       disabled={isSubLoading}
-      className='btn mb-4 mt-1 btn-block'
+      className='btn mb-4 mt-1 btn-block btn-accent'
     >
       {isSubLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />} Join
       to post

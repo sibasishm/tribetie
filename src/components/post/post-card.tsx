@@ -32,7 +32,7 @@ const Post: React.FC<PostProps> = ({
   const postRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="rounded-md bg-white shadow">
+    <div className="rounded-md bg-neutral shadow">
       <div className="flex justify-between px-6 py-4">
         {/* <PostVoteClient
           postId={post.id}
@@ -40,11 +40,11 @@ const Post: React.FC<PostProps> = ({
           initialVoteAmount={voteAmount}
         /> */}
         <div className="w-0 flex-1">
-          <div className="mt-1 max-h-40 text-xs text-gray-500">
+          <div className="mt-1 max-h-40 text-xs text-base-content">
             {communityName && (
               <>
                 <a
-                  className="text-sm text-zinc-900 underline underline-offset-2"
+                  className="text-sm text-base-content underline underline-offset-2"
                   href={`/t/${communityName}`}
                 >
                   r/{communityName}
@@ -57,7 +57,7 @@ const Post: React.FC<PostProps> = ({
           </div>
 
           <a href={`/t/${communityName}/post/${post.id}`}>
-            <h3 className="py-2 text-lg font-semibold leading-6 text-gray-900">
+            <h3 className="py-2 text-lg font-semibold leading-6 text-gray-100">
               {post.title}
             </h3>
           </a>
@@ -74,7 +74,7 @@ const Post: React.FC<PostProps> = ({
         </div>
       </div>
 
-      <div className="z-20 bg-gray-50 p-4 text-sm sm:px-6">
+      <div className="z-20 bg-base-200 p-4 text-sm sm:px-6">
         <a
           href={`/t/${communityName}/post/${post.id}`}
           className="flex w-fit items-center gap-2"

@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 import NavBar from "../components/navabr/navbar";
 import Providers from "~/components/providers";
 import { Toaster } from "~/components/toaster";
-import { cn } from "~/lib/utils";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,9 +27,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("bg-white text-slate-900 antialiased", inter.variable)}
+      className={inter.variable}
+      data-theme="dim"
     >
-      <body className="min-h-screen bg-slate-50 pt-12 antialiased">
+      <body className="min-h-screen pt-12 antialiased">
         <Providers>
           <NavBar />
           {authModal}

@@ -35,7 +35,7 @@ const UserAccountNav: React.FC<UserAccountNavProps> = ({ currentUser }) => {
         <UserAvatar className="h-10 w-10" currentUser={currentUser} />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="bg-white" align="end">
+      <DropdownMenuContent className="bg-base-100" align="end">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
             {currentUser.name && (
