@@ -194,13 +194,13 @@ const Editor: React.FC<EditorProps> = ({ communityId }) => {
   }
 
   return (
-    <div className="w-full rounded-lg border border-zinc-200 bg-zinc-50 p-4">
+    <div className="w-full rounded-lg border border-gray-500 bg-neutral p-4 text-neutral-content">
       <form
         id="community-form-post"
         className="w-fit"
         onSubmit={(...args) => void handleSubmit(onSubmit)(...args)}
       >
-        <div className="prose prose-stone dark:prose-invert">
+        <article className="prose">
           <TextareaAutoSize
             ref={(e) => {
               titleRef(e);
@@ -213,7 +213,7 @@ const Editor: React.FC<EditorProps> = ({ communityId }) => {
           />
 
           <div id="editor" className="min-h-[500px]" />
-        </div>
+        </article>
       </form>
     </div>
   );

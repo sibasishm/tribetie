@@ -9,7 +9,7 @@ const CloseModal = () => {
 
   return (
     <button
-      className="btn btn-circle btn-secondary"
+      className="btn btn-circle btn-ghost"
       aria-label="close modal"
       onClick={() => router.back()}
     >

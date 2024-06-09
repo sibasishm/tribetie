@@ -59,7 +59,7 @@ const SearchBar = () => {
   return (
     <Command
       ref={commandRef}
-      className="relative z-50 max-w-lg overflow-visible rounded-lg border"
+      className="relative z-50 max-w-lg overflow-visible rounded-lg border border-gray-400"
     >
       <CommandInput
         isLoading={isFetching}

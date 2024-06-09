@@ -24,7 +24,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser, ...props }) => {
         />
       ) : (
         <AvatarFallback>
-          <span className="sr-only">{currentUser?.name}</span>
+          <span className="sr-only">user icon placeholder</span>
           <Icons.user className="h-4 w-4" />
         </AvatarFallback>
       )}
