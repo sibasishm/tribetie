@@ -35,18 +35,10 @@ const UsernameForm: React.FC<UsernameFormProps> = ({ currentUser }) => {
   });
 
   const { mutate: updateUser, isPending: isLoading } = useMutation({
-    mutationFn: async ({ name }: UsernameRequest) => {
-      const payload: UsernameRequest = {
-        name,
-      };
-
-      const data = await ky
-        .patch("api/username", { json: payload })
-        .json<string>();
-
-      return data;
-    },
+    mutationFn: ({ name }: UsernameRequest) =>
+      ky.patch("api/username", { json: { name } }),
     onError: (error) => {
+      console.log(error);
       if (error instanceof HTTPError && error.response?.status === 409) {
         return toast({
           title: "Username already taken",
