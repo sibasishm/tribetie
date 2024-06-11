@@ -7,14 +7,7 @@ import { redis } from "~/lib/redis";
 import { PostVoteValidator } from "~/lib/validators/vote";
 import { getCurrentUser } from "~/services/user";
 import { CACHE_AFTER_UPVOTES } from "~/config";
-
-export type CachedPost = {
-  id: number;
-  title: string;
-  authorUsername: string;
-  content: string;
-  createdAt: Date;
-};
+import type { CachedPost } from "~/lib/types";
 
 export async function PATCH(req: Request) {
   try {

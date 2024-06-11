@@ -16,6 +16,14 @@ export type ExtendedPost = Post & {
   comments: Comment[];
 };
 
+export type CachedPost = {
+  id: number;
+  title: string;
+  authorUsername: string;
+  content: string;
+  createdAt: Date;
+};
+
 export type VoteType = "UP" | "DOWN";
 
 export type PartialVote = Pick<Vote, "type">;
