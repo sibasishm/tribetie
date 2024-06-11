@@ -35,21 +35,24 @@ const UserAccountNav: React.FC<UserAccountNavProps> = ({ currentUser }) => {
         <UserAvatar className="h-10 w-10" currentUser={currentUser} />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="bg-base-100" align="end">
+      <DropdownMenuContent
+        className="bg-neutral text-neutral-content"
+        align="end"
+      >
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
             {currentUser.name && (
               <p className="font-medium">{currentUser.name}</p>
             )}
             {currentUser.email && (
-              <p className="w-[200px] truncate text-sm text-zinc-700">
+              <p className="w-[200px] truncate text-sm text-zinc-200">
                 {currentUser.email}
               </p>
             )}
           </div>
         </div>
 
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-gray-400" />
 
         <DropdownMenuItem asChild>
           <Link href="/">Feed</Link>
@@ -63,7 +66,7 @@ const UserAccountNav: React.FC<UserAccountNavProps> = ({ currentUser }) => {
           <Link href="settings">Settings</Link>
         </DropdownMenuItem>
 
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-gray-400" />
 
         <DropdownMenuItem
           onSelect={(e) => void Logout(e)}
