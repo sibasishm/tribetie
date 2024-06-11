@@ -9,7 +9,7 @@ import { formatTimeToNow } from "~/lib/utils";
 import type { PartialVote } from "~/lib/types";
 
 import EditorOutput from "../editor/editor-output";
-// import PostVoteClient from "../post-vote/PostVoteClient";
+import PostVoteClient from "../post-vote/post-vote";
 
 type PostProps = {
   post: Post & {
@@ -26,19 +26,19 @@ const Post: React.FC<PostProps> = ({
   post,
   communityName,
   commentAmount,
-  // voteAmount,
-  // currentVote,
+  voteAmount,
+  currentVote,
 }) => {
   const postRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="rounded-md bg-neutral shadow">
       <div className="flex justify-between px-6 py-4">
-        {/* <PostVoteClient
+        <PostVoteClient
           postId={post.id}
           initialVote={currentVote?.type}
           initialVoteAmount={voteAmount}
-        /> */}
+        />
         <div className="w-0 flex-1">
           <div className="mt-1 max-h-40 text-xs text-base-content">
             {communityName && (
