@@ -11,7 +11,7 @@ const Navbar = async () => {
 
   return (
     <nav className="fixed inset-x-0 top-0 z-10 h-fit border-b border-zinc-600 bg-neutral py-2">
-      <div className="container mx-auto flex h-full max-w-7xl items-center justify-between gap-2">
+      <div className="container mx-auto flex h-full max-w-7xl items-center justify-between gap-2 px-2 sm:px-4">
         <Link href="/">
           <Icons.logo className="h-5 sm:h-7" />
         </Link>
@@ -21,7 +21,7 @@ const Navbar = async () => {
         {currentUser ? (
           <UserAccountNav currentUser={currentUser} />
         ) : (
-          <Link href="/login" className="btn btn-primary">
+          <Link href="/login" className="btn btn-primary btn-sm sm:btn-md">
             Login
           </Link>
         )}

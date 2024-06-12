@@ -44,7 +44,6 @@ const Editor: React.FC<EditorProps> = ({ communityId }) => {
   const initializeEditor = useCallback(async () => {
     const EditorJS = (await import("@editorjs/editorjs")).default;
     const Header = (await import("@editorjs/header")).default;
-    const Table = (await import("@editorjs/table")).default;
     const List = (await import("@editorjs/list")).default;
     const Code = (await import("@editorjs/code")).default;
     const Embed = (await import("@editorjs/embed")).default;
@@ -92,7 +91,6 @@ const Editor: React.FC<EditorProps> = ({ communityId }) => {
           list: List,
           code: Code,
           inlineCode: InlineCode,
-          table: Table,
           embed: Embed,
         },
       });
