@@ -15,6 +15,9 @@ export default {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      sans: ["var(--font-sans)", "sans-serif"],
+    },
   },
   plugins: [
     require("@tailwindcss/typography"),
