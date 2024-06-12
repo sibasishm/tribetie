@@ -47,7 +47,7 @@ const Post: React.FC<PostProps> = ({
                   className="text-sm text-base-content underline underline-offset-2"
                   href={`/t/${communityName}`}
                 >
-                  r/{communityName}
+                  t/{communityName}
                 </a>
                 <span className="px-1">•</span>
               </>

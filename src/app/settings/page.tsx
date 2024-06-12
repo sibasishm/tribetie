@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 
 import { getCurrentUser } from "~/services/user";
 import UsernameForm from "~/components/username-form";
+import PersonaCard from "~/components/persona-card";
 
 export const metadata = {
   title: "Settings",
@@ -16,10 +17,8 @@ const SettingsPage = async () => {
     <div className="mx-auto max-w-4xl py-12">
       <div className="grid items-start gap-8">
         <h2 className="text-3xl font-bold md:text-4xl">Settings</h2>
-
-        <div className="grid gap-10">
-          <UsernameForm currentUser={currentUser} />
-        </div>
+        <PersonaCard currentUser={currentUser} />
+        <UsernameForm currentUser={currentUser} />
       </div>
     </div>
   );
