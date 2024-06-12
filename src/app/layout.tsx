@@ -1,12 +1,12 @@
 import "~/styles/globals.css";
 
-import { Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 
 import NavBar from "../components/navabr/navbar";
 import Providers from "~/components/providers";
 import { Toaster } from "~/components/toaster";
 
-const inter = Inter({
+const fontSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -25,12 +25,8 @@ export default function RootLayout({
   authModal: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={inter.variable}
-      data-theme="dim"
-    >
-      <body className="min-h-screen pt-12 antialiased">
+    <html lang="en" className={fontSans.variable} data-theme="dim">
+      <body className="min-h-screen pt-12 font-sans antialiased">
         <Providers>
           <NavBar />
           {authModal}

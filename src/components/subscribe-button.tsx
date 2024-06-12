@@ -1,126 +1,124 @@
-'use client'
+"use client";
 
-import React, { startTransition } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { startTransition } from "react";
+import { useRouter } from "next/navigation";
 
-import { useMutation } from '@tanstack/react-query'
-import ky, { HTTPError } from 'ky'
-import { Loader2 } from 'lucide-react'
+import { useMutation } from "@tanstack/react-query";
+import ky, { HTTPError } from "ky";
+import { Loader2 } from "lucide-react";
 
-import type { SubscribeToCommunityPayload } from '~/lib/validators/community'
-import { useAuthToasts } from '~/hooks/use-auth-toats'
-import { toast } from '~/hooks/use-toast'
+import type { SubscribeToCommunityPayload } from "~/lib/validators/community";
+import { useAuthToasts } from "~/hooks/use-auth-toats";
+import { toast } from "~/hooks/use-toast";
 
 type SubscribeLeaveToggleProps = {
-  communityId: number
-  communityName: string
-  isSubscribed: boolean
-}
+  communityId: number;
+  communityName: string;
+  isSubscribed: boolean;
+};
 
 const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
   communityId,
   communityName,
-  isSubscribed
+  isSubscribed,
 }) => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const { loginToast } = useAuthToasts()
+  const { loginToast } = useAuthToasts();
 
   const { mutate: subscribe, isPending: isSubLoading } = useMutation({
     mutationFn: async () => {
       const payload: SubscribeToCommunityPayload = {
-        communityId
-      }
+        communityId,
+      };
 
-      const data = await ky.post(
-        '/api/community/subscribe',
-        {
-          json: payload
-        }
-      ).json<string>()  
+      const data = await ky
+        .post("/api/community/subscribe", {
+          json: payload,
+        })
+        .json<string>();
 
-      return data
+      return data;
     },
     onError: (error) => {
       if (error instanceof HTTPError && error.response?.status === 401) {
-        return loginToast()
+        return loginToast();
       }
 
       return toast({
-        title: 'There was a problem',
-        description: 'Something went wrong please try again',
-        variant: 'destructive'
-      })
+        title: "There was a problem",
+        description: "Something went wrong please try again",
+        variant: "destructive",
+      });
     },
     onSuccess: () => {
       startTransition(() => {
-        router.refresh()
-      })
+        router.refresh();
+      });
 
       return toast({
-        title: 'Subscribe',
-        description: `You are now subscribed to r/${communityName}`
-      })
-    }
-  })
+        title: "Subscribe",
+        description: `You are now subscribed to t/${communityName}`,
+      });
+    },
+  });
 
   const { mutate: unsubscribe, isPending: isUnsubLoading } = useMutation({
     mutationFn: async () => {
       const payload: SubscribeToCommunityPayload = {
-        communityId
-      }
+        communityId,
+      };
 
-      const data = await ky.post(
-        '/api/community/unsubscribe',
-        {
-          json: payload
-        }
-      ).json<string>()
+      const data = await ky
+        .post("/api/community/unsubscribe", {
+          json: payload,
+        })
+        .json<string>();
 
-      return data
+      return data;
     },
     onError: (error) => {
       if (error instanceof HTTPError && error.response?.status === 401) {
-        return loginToast()
+        return loginToast();
       }
 
       return toast({
-        title: 'There was a problem',
-        description: 'Something went wrong please try again',
-        variant: 'destructive'
-      })
+        title: "There was a problem",
+        description: "Something went wrong please try again",
+        variant: "destructive",
+      });
     },
     onSuccess: () => {
       startTransition(() => {
-        router.refresh()
-      })
+        router.refresh();
+      });
 
       return toast({
-        title: 'Unsubscribe',
-        description: `You are now unsubscribed from r/${communityName}`
-      })
-    }
-  })
+        title: "Unsubscribe",
+        description: `You are now unsubscribed from t/${communityName}`,
+      });
+    },
+  });
 
   return isSubscribed ? (
     <button
       onClick={() => void unsubscribe()}
       disabled={isUnsubLoading}
-      className='btn mb-4 mt-1 btn-block btn-accent'
+      className="btn btn-accent btn-block mb-4 mt-1"
     >
-      {isUnsubLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}{' '}
+      {isUnsubLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{" "}
       Leave community
     </button>
   ) : (
     <button
       onClick={() => void subscribe()}
       disabled={isSubLoading}
-      className='btn mb-4 mt-1 btn-block btn-accent'
+      className="btn btn-accent btn-block mb-4 mt-1"
     >
-      {isSubLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />} Join
+      {isSubLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Join
       to post
     </button>
-  )
-}
+  );
+};
 
-export default SubscribeLeaveToggle
+export default SubscribeLeaveToggle;

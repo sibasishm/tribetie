@@ -63,7 +63,7 @@ const UserAccountNav: React.FC<UserAccountNavProps> = ({ currentUser }) => {
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
-          <Link href="settings">Settings</Link>
+          <Link href="/settings">Settings</Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator className="bg-gray-400" />

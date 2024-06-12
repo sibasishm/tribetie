@@ -36,9 +36,8 @@ export default function QuestionPage() {
       try {
         const persona = matchPersona(responses);
         if (persona) {
-          console.log("persona", persona);
           await createPersona(persona.persona_id);
-          router.push("/welcome");
+          router.push("/settings");
         } else {
           alert("No persona found");
         }
@@ -99,7 +98,7 @@ export default function QuestionPage() {
                           "flex items-center space-x-3 space-y-0 rounded-xl border p-3 px-4",
                           field.value === choice
                             ? "border-2 border-primary text-primary"
-                            : "border-slate-50",
+                            : "border-gray-400",
                         )}
                       >
                         <FormControl>
@@ -116,7 +115,7 @@ export default function QuestionPage() {
                     ))}
                   </RadioGroup>
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-error" />
               </FormItem>
             )}
           />
