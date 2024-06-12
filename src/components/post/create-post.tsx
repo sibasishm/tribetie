@@ -30,7 +30,7 @@ const CreatePost: React.FC<MiniCreatePostProps> = ({ currentUser }) => {
           placeholder="Create post"
           className="input input-bordered w-full flex-1"
         />
-        <div>
+        <div className="hidden items-center gap-2 sm:flex">
           <button
             className="btn btn-ghost"
             onClick={() => void router.push(`${pathname}/submit`)}

@@ -41,9 +41,6 @@ importers:
       '@editorjs/paragraph':
         specifier: ^2.10.0
         version: 2.11.4
-      '@editorjs/table':
-        specifier: ^2.2.2
-        version: 2.3.0
       '@hookform/resolvers':
         specifier: ^3.3.4
         version: 3.6.0(react-hook-form@7.51.5(react@18.2.0))
@@ -267,9 +264,6 @@ packages:
 
   '@editorjs/paragraph@2.11.4':
     resolution: {integrity: sha512-OuTINHoHrJwKxlpTm6FtiXazwagALJbP49hfbQWBOLTNiBICncqPe1hdGfgDpeEgH9ZEGZsJelhEDxw2iwcmPA==}
-
-  '@editorjs/table@2.3.0':
-    resolution: {integrity: sha512-/dKE6A5FkukX/FpvIyQGsewwXglZk8YbXpEp9vkB6Ec4ETLeGJMxObCcYqbXqVod+IU/a1tFH+j3lsD8ASD41g==}
 
   '@esbuild-kit/core-utils@3.3.2':
     resolution: {integrity: sha512-sPRAnw9CdSsRmEtnsl2WXWdyquogVpB3yZ3dgwJfe8zrOzTsV7cJvmwrKVa+0ma5BoiGJ+BoqkMvawbayKUsqQ==}
@@ -3215,10 +3209,6 @@ snapshots:
   '@editorjs/paragraph@2.11.4':
     dependencies:
       '@codexteam/icons': 0.0.4
-
-  '@editorjs/table@2.3.0':
-    dependencies:
-      '@codexteam/icons': 0.0.6
 
   '@esbuild-kit/core-utils@3.3.2':
     dependencies:

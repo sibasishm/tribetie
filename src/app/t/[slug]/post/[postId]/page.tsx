@@ -57,7 +57,7 @@ const PostPage: React.FC<pageProps> = async ({ params }) => {
   };
 
   return (
-    <div className="flex h-full flex-col items-center justify-between sm:flex-row sm:items-start">
+    <div className="flex h-full items-center justify-between sm:items-start">
       <Suspense fallback={<PostVoteShell />}>
         <PostVoteServer
           postId={post?.id ?? cachedPost.id}
